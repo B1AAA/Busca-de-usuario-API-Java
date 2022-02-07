@@ -1,4 +1,4 @@
-package br.com.projetoudemy.api.config;
+package br.com.projetoudemy.api.domain.config;
 
 import br.com.projetoudemy.api.domain.User;
 import br.com.projetoudemy.api.repositories.UserRepository;
