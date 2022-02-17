@@ -3,6 +3,7 @@ package br.com.projetoudemy.api.services.impl;
 import br.com.projetoudemy.api.domain.User;
 import br.com.projetoudemy.api.dto.UserDto;
 import br.com.projetoudemy.api.repositories.UserRepository;
+import br.com.projetoudemy.api.services.exceptions.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,6 +59,17 @@ class UserServiceImplTest {
         assertEquals(NAME,response.getName());
         assertEquals(EMAIL,response.getEmail());
 
+    }
+
+    @Test
+    void whenFindByIdThenReturnAnObjectNotFoundException(){
+       when(repository.findById(anyInt())).thenThrow(new ObjectNotFoundException("Objeto não encontrado"));
+
+       try{
+           service.findById(ID);
+       }catch(Exception ex){
+           assertEquals(ObjectNotFoundException.class,ex.getClass());
+       }
     }
 
     @Test
